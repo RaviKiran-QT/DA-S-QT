@@ -22,7 +22,7 @@
             <section id="questions" class="tab-content">
                 <div class="section">
                     <textarea id="questionInput" placeholder="Type your question here..." aria-label="Question input"></textarea>
-                    <input type="file" id="imageInput" accept="image/*" onchange="previewImage('question')" aria-label="Attach image">
+                    <input type="file" id="imageInput" accept="image/*" onchange="previewImage()" aria-label="Attach image">
                     <div id="imagePreview" class="image-preview"></div>
                     <button type="button" onclick="postQuestion()">Post Question</button>
                 </div>
@@ -57,6 +57,10 @@
             </section>
         </main>
     </div>
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
