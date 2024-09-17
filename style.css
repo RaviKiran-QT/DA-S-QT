@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f3a683, #f7b7a3);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #f76c6c;
+    font-size: 2.5em;
+    margin: 0;
+    padding: 10px;
+    background: linear-gradient(45deg, #ff6b6b, #f9cb40);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background: linear-gradient(45deg, #ff9a8b, #ff6f61);
+    color: #ffffff;
+    border: none;
+    padding: 12px 25px;
+    margin: 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.tab-button:hover {
+    background: linear-gradient(45deg, #ff6f61, #ff9a8b);
+    transform: scale(1.05);
+}
+
+.tab-content {
+    display: none;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+textarea, input[type="text"], input[type="file"] {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 2px solid #f76c6c;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+button {
+    background: linear-gradient(45deg, #ff6f61, #ff9a8b);
+    color: #ffffff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #ff9a8b, #ff6f61);
+    transform: scale(1.05);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 12px;
+    border-bottom: 2px solid #f76c6c;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+li:hover {
+    background-color: #ffe0e0;
+}
+
+h2 {
+    color: #ff6f61;
+    font-size: 1.5em;
+}
+
+#answersDisplay, #searchResults {
+    border: 2px solid #f76c6c;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+.preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}

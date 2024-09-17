@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question & Answer App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>DA'S QT</h1>
+        </header>
+
+        <nav class="tabs">
+            <button type="button" class="tab-button" onclick="openTab('questions')">Questions</button>
+            <button type="button" class="tab-button" onclick="openTab('answers')">Answers</button>
+            <button type="button" class="tab-button" onclick="openTab('search')">Search</button>
+        </nav>
+
+        <main>
+            <section id="questions" class="tab-content">
+                <div class="section">
+                    <textarea id="questionInput" placeholder="Type your question here..." aria-label="Question input"></textarea>
+                    <input type="file" id="imageInput" accept="image/*" onchange="previewImage('question')" aria-label="Attach image">
+                    <div id="imagePreview" class="image-preview"></div>
+                    <button type="button" onclick="postQuestion()">Post Question</button>
+                </div>
+                <div class="section">
+                    <h2>Posted Questions</h2>
+                    <ul id="questionsList"></ul>
+                </div>
+            </section>
+
+            <section id="answers" class="tab-content">
+                <div class="section">
+                    <h2 id="selectedQuestionLabel">Selected Question:</h2>
+                    <div id="answerImagePreview" class="image-preview"></div>
+                    <textarea id="answerInput" placeholder="Type your answer here..." aria-label="Answer input" disabled></textarea>
+                    <button type="button" onclick="submitAnswer()" id="submitAnswerButton" disabled>Submit Answer</button>
+                </div>
+                <div class="section">
+                    <h2>Answers</h2>
+                    <div id="answersDisplay"></div>
+                </div>
+            </section>
+
+            <section id="search" class="tab-content">
+                <div class="section">
+                    <input type="text" id="searchInput" placeholder="Search..." aria-label="Search input">
+                    <button type="button" onclick="performSearch()">Search</button>
+                </div>
+                <div class="section">
+                    <h2>Search Results</h2>
+                    <div id="searchResults"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
