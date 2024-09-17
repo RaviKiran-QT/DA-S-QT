@@ -1,3 +1,20 @@
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Reference to the database
+const database = firebase.database();
+
 let questions = [];
 let answers = {};
 let currentQuestion = null;
@@ -14,25 +31,39 @@ function postQuestion() {
     const imageInput = document.getElementById('imageInput').files[0];
 
     if (questionInput || imageInput) {
-        // Check if the question is already posted
-        if (!questions.some(q => q.text === questionInput)) {
-            const questionData = {
-                text: questionInput,
-                image: imageInput ? URL.createObjectURL(imageInput) : null
-            };
-            questions.push(questionData);
-            answers[questionInput] = '';
-            updateQuestionList();
+        const questionData = {
+            text: questionInput,
+            image: imageInput ? URL.createObjectURL(imageInput) : null
+        };
+
+        // Save to Firebase
+        database.ref('questions').push(questionData).then(() => {
             document.getElementById('questionInput').value = '';
             document.getElementById('imageInput').value = '';
             document.getElementById('imagePreview').innerHTML = '';
             refreshSearchTab();
-        } else {
-            alert('Question already posted.');
-        }
+        });
     } else {
         alert('Please enter a question or upload an image.');
     }
+}
+
+function loadQuestions() {
+    database.ref('questions').on('value', (snapshot) => {
+        const questionsData = snapshot.val();
+        questions = [];
+        answers = {};
+
+        if (questionsData) {
+            for (const key in questionsData) {
+                questions.push(questionsData[key]);
+                answers[questionsData[key].text] = '';
+            }
+            updateQuestionList();
+            updateAnswersDisplay();
+            refreshSearchTab();
+        }
+    });
 }
 
 function updateQuestionList() {
@@ -71,16 +102,28 @@ function submitAnswer() {
     if (currentQuestion) {
         const answerInput = document.getElementById('answerInput').value.trim();
         if (answerInput) {
-            answers[currentQuestion] = answerInput;
-            document.getElementById('answerInput').value = '';
-            updateAnswersDisplay();
-            refreshSearchTab();
+            // Save answer to Firebase
+            database.ref('answers').child(currentQuestion).set(answerInput).then(() => {
+                document.getElementById('answerInput').value = '';
+                updateAnswersDisplay();
+                refreshSearchTab();
+            });
         } else {
             alert('Please enter an answer.');
         }
     } else {
         alert('No question selected.');
     }
+}
+
+function loadAnswers() {
+    database.ref('answers').on('value', (snapshot) => {
+        const answersData = snapshot.val();
+        if (answersData) {
+            answers = answersData;
+            updateAnswersDisplay();
+        }
+    });
 }
 
 function updateAnswersDisplay() {
@@ -142,3 +185,9 @@ function previewImage() {
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
+
+// Initialize data
+document.addEventListener('DOMContentLoaded', function() {
+    loadQuestions();
+    loadAnswers();
+});
